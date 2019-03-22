@@ -1,0 +1,92 @@
+Question 1: toutes les capitales 
+Requête : //capital ou /countries/country/capital
+capital	Oranjestad
+capital	Kabul
+capital	Luanda
+
+Question 2: les noms officiels des pays
+Requête : //official ou /countries/country/name/official
+official	Aruba
+official	Islamic Republic of Afghanistan
+official	Republic of Angola
+
+Question 3: la superficie de chaque pays 
+Requête : //@area ou /countries/country/@area
+area	180
+area	652230
+area	1246700
+
+Question 4: les éléments ayant exactement un attribut
+Requête : //*[count(@*) = 1]
+country	
+native_name	
+native_name	
+
+Question 5 : les noms officiels des pays exprimés français, pour ceux qui en ont
+Requête : //native_name[@lang="fra"]/official
+official	Territoire des Terres australes et antarctiques françaises
+official	République du Burundi
+official	Royaume de Belgique
+
+Question 6 : les deuxièmes noms natifs officiels des pays
+Requête : //native_name[position() = 2]/official ou //country/name/native_name[2]/official
+official	Aruba
+official	
+official	República Argentina
+
+Question 7 : la somme des superficies (area) des pays d'Europe 
+Requête : sum(//country[infosContinent/continent="Europe"]/@area)
+
+Result = 2,302...E7
+
+Question 8 : les pays qui n'ont pas de nom natif
+Requête : //country/name[count(native_name)=0]/official ou //name[count(native_name)=0]/official
+official	Antarctica
+
+Question 9 : les pays dont la superficie est inférieure à 100 km² 
+Requête : //country[@area < 100]/name/official
+official	Anguilla
+official	Collectivity of Saint Barthélemy
+official	Bermuda
+
+Question 10 : les noms officiels des pays ayant plus de 7 voisins (neighbour)
+Requête : //borders[count(neighbour)>7]/../name/official
+official	Republic of Austria
+official	Federative Republic of Brazil
+official	People's Republic of China
+
+Question 11: la position de la France dans le document XML 
+Requête : count(//country[name/common="France"]/preceding-sibling::*)+1
+Result = 76.0
+
+Question 12: les noms officiels des royaumes (nom officiel contient "Kingdom")
+Requête : //country/name[contains(official,"Kingdom")]/official
+official	Kingdom of Belgium
+official	Kingdom of Bahrain
+official	Kingdom of Bhutan
+
+Question 13 : les langues des noms natifs des pays sans doublons 
+Requête : //native_name[not(preceding::native_name/@lang=@lang)]/@lang	
+lang	nld
+lang	pap
+lang	prs
+
+Partie 2:
+
+On supprime area de l'élément country
+<!ATTLIST country area CDATA #REQUIRED>
+
+Ajout d'un nouvel élément continent <!ELEMENT continent (#PCDATA)>
+
+Modification de l'élément neighbourers --> neighbour
+
+infosRegion --> infosContinent dans l'élément country
+
+infosContinent* --> infosContinent+
+
+Partie 3 :
+
+
+
+
+
