@@ -32,6 +32,9 @@
 				<th>
 					Coordonnées
 				</th>
+				<th>
+					Drapeau
+				</th>
 			</tr>
 			<xsl:apply-templates select="//country"/>
 		</table> 
@@ -82,7 +85,8 @@
 			</td>
 
 			<td>
-				<img src="(concat(http://www.geonames.org/flags/x/fr.gif" alt="" height="40" width="60"> //A FINIR LE CONCAT
+				<xsl:variable name="CCA2" select="codes/cca2"/>
+				<img src="http://www.geonames.org/flags/x/AW.gif" alt="" height="40" width="60"/>
 			</td>
 		</tr>
 	</xsl:template>

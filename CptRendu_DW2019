@@ -1,4 +1,4 @@
-Question 1: toutes les capitales 
+﻿Question 1: toutes les capitales 
 Requête : //capital ou /countries/country/capital
 capital	Oranjestad
 capital	Kabul
@@ -86,7 +86,27 @@ infosContinent* --> infosContinent+
 
 Partie 3 :
 
+Bouton 1 : modifie la couleur de l'arrière plan de la page en bleu et la couleur du texte du bouton en blanc.
+function Bouton1_BackgroundColor(color){
+	document.body.style.background = color;
+	document.getElementById("myButton1").style.color = 'white';
+}
 
+Bouton 2 : remet la couleur de l'arrière plan en blanc
 
+Bouton 3 / Champ de saisi : affiche le nom officiel et la capitale du pays dont le nom est sélectionné dans le champ de saisie. Chargez le fichier XML countriesTP.xml en ajax. Ecrivez une feuille de style : cherchePays.xsl, qui prend un paramètre NomPays, chargez le en ajax également. Cette feuille de style appliquée au fichier xml : countriesTP.xml retourne les éléments recherchés correspondant qu pays. Utilisez la fonction javascript XSLTProcessor.setParameter pour passer le paramètre à la feuille de style.
+
+Bouton 4: charge et afiche le dessin svg contenu dans le fichier : exemple.svg
+
+Bouton 5 : rend les éléments du fichier svg "clickables" et affiche la valeur de leur attribut title quand ils sont cliqués (utilisez la méthode addEventListener)
+
+Bouton 6 : charge et affiche la carte du monde en svg contenu dans le fichier worldHigh.svg
+
+Bouton 7 : rend les pays clickables et affiche leur attribut title au click
+
+Bouton 8 : captez l'évènement de passage (mouseover) et sorti (mouseleave) de la souris sur les pays de la carte. Au passage: changez leur couleur et affichez leur : nom, capitale et drapeau dans un tableau au dessus de la carte
+
+Bouton 9 : complétez le champ de saisie du bouton 3 avec une fonction d'autocomplétion
+Proposez une visualisation intéressante mettant en jeu le fichier XML countriesTP.xml , la carte svg worldHigh.svg ainsi que des informations enrichies depuis des services web (par exemple : geonames, dbpedia, ....)
 
 

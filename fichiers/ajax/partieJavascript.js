@@ -59,7 +59,16 @@ function chargerHttpJSON(jsonDocumentUrl) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function Bouton2_ajaxBibliographie(xmlDocumentUrl, xslDocumentUrl, newElementName) {
+function Bouton1_BackgroundColor(color){
+	document.body.style.background = color;
+	document.getElementById("myButton1").style.color = 'white';
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function Bouton2_ResetBackgroundColor() {
+	document.body.style.background = 'white';
+}
+/*function Bouton2_ajaxBibliographie(xmlDocumentUrl, xslDocumentUrl, newElementName) {
 
     var xsltProcessor = new XSLTProcessor();
 
@@ -85,10 +94,18 @@ function Bouton2_ajaxBibliographie(xmlDocumentUrl, xslDocumentUrl, newElementNam
     // Remplacement de l'élément
     elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
 
-}
+}*/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function Bouton3_ajaxEmployees(xmlDocumentUrl) {
+
+function Bouton3_NomPays(){
+	
+	var xmlPays = chargerHttpXML('countriesTP.xml');
+	var xslPays = chargerHttpXML('cherchePays.xsl');
+	
+}
+
+/*function Bouton3_ajaxEmployees(xmlDocumentUrl) {
 
 
     var xmlDocument = chargerHttpXML(xmlDocumentUrl);
@@ -112,9 +129,7 @@ function Bouton3_ajaxEmployees(xmlDocumentUrl) {
     // Appel (ou recopie) de la fonction setNom(...) ou bien autre façon de modifier le texte de l'élément "span"
     setNom(chaineDesNoms);
 
-
-
-}
+}*/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function Bouton4_ajaxEmployeesTableau(xmlDocumentUrl, xslDocumentUrl) {
