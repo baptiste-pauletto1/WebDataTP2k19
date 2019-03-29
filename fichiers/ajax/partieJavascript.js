@@ -9,8 +9,8 @@ function recupererPremierEnfantDeTypeNode(n) {
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //change le contenu de l'élement avec l'id "nom" avec la chaine de caractéres en paramètre	  
-function setNom(nom) {
-    var elementHtmlARemplir = window.document.getElementById("id_nom_a_remplacer");
+function setNom(id,nom) {
+    var elementHtmlARemplir = window.document.getElementById(id);
     elementHtmlARemplir.innerHTML = nom;
 }
 
@@ -99,9 +99,14 @@ function Bouton2_ResetBackgroundColor() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function Bouton3_NomPays(){
-	
+    setNom("paysNomOfficiel","chaussure");
+    setNom("paysCapitale","panier");
+	var xsltProcess = new XSLTProcessor();
 	var xmlPays = chargerHttpXML('countriesTP.xml');
 	var xslPays = chargerHttpXML('cherchePays.xsl');
+    xsltProcess.setParameter('nomPays',document.getElementById("nomPays").value);
+    xsltProcess.importStylesheet('cherchePays.xsl');
+    var newXmlDocument = xsltProcessor.transformToDocument('countriesTP.xml');
 	
 }
 
