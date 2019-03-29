@@ -1,5 +1,4 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 function recupererPremierEnfantDeTypeNode(n) {
     var x = n.firstChild;
     while (x.nodeType != 1) { // Test if x is an element node (and not a text node or other)
@@ -8,14 +7,14 @@ function recupererPremierEnfantDeTypeNode(n) {
     return x;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//change le contenu de l'élement avec l'id "nom" avec la chaine de caractéres en paramètre	  
+//change le contenu de l'Ã©lement avec l'id "nom" avec la chaine de caractÃ©res en paramÃ¨tre	  
 function setNom(id,nom) {
     var elementHtmlARemplir = window.document.getElementById(id);
     elementHtmlARemplir.innerHTML = nom;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//charge le fichier XML se trouvant à l'URL relative donné dans le paramètreet le retourne
+//charge le fichier XML se trouvant Ã  l'URL relative donnÃ© dans le paramÃ¨treet le retourne
 function chargerHttpXML(xmlDocumentUrl) {
 
     var httpAjax;
@@ -28,7 +27,7 @@ function chargerHttpXML(xmlDocumentUrl) {
         httpAjax.overrideMimeType('text/xml');
     }
 
-    //chargement du fichier XML à l'aide de XMLHttpRequest synchrone (le 3° paramètre est défini à false)
+    //chargement du fichier XML Ã  l'aide de XMLHttpRequest synchrone (le 3Â° paramÃ¨tre est dÃ©fini Ã  false)
     httpAjax.open('GET', xmlDocumentUrl, false);
     httpAjax.send();
 
@@ -36,7 +35,7 @@ function chargerHttpXML(xmlDocumentUrl) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-// Charge le fichier JSON se trouvant à l'URL donnée en paramètre et le retourne
+// Charge le fichier JSON se trouvant Ã  l'URL donnÃ©e en paramÃ¨tre et le retourne
 function chargerHttpJSON(jsonDocumentUrl) {
 
     var httpAjax;
@@ -49,7 +48,7 @@ function chargerHttpJSON(jsonDocumentUrl) {
         httpAjax.overrideMimeType('text/xml');
     }
 
-    // chargement du fichier JSON à l'aide de XMLHttpRequest synchrone (le 3° paramètre est défini à false)
+    // chargement du fichier JSON Ã  l'aide de XMLHttpRequest synchrone (le 3Â° paramÃ¨tre est dÃ©fini Ã  false)
     httpAjax.open('GET', jsonDocumentUrl, false);
     httpAjax.send();
 
@@ -68,76 +67,119 @@ function Bouton1_BackgroundColor(color){
 function Bouton2_ResetBackgroundColor() {
 	document.body.style.background = 'white';
 }
-/*function Bouton2_ajaxBibliographie(xmlDocumentUrl, xslDocumentUrl, newElementName) {
-
-    var xsltProcessor = new XSLTProcessor();
-
-    // Chargement du fichier XSL à l'aide de XMLHttpRequest synchrone 
-    var xslDocument = chargerHttpXML(xslDocumentUrl);
-
-    // Importation du .xsl
-    xsltProcessor.importStylesheet(xslDocument);
-
-    // Chargement du fichier XML à l'aide de XMLHttpRequest synchrone 
-    var xmlDocument = chargerHttpXML(xmlDocumentUrl);
-
-    // Création du document XML transformé par le XSL
-    var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
-
-    // Recherche du parent (dont l'id est "here") de l'élément à remplacer dans le document HTML courant
-    var elementHtmlParent = window.document.getElementById("id_element_a_remplacer");
-    // Premier élément fils du parent
-    var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
-    // Premier élément "elementName" du nouveau document (par exemple, "ul", "table"...)
-    var elementAInserer = newXmlDocument.getElementsByTagName(newElementName)[0];
-
-    // Remplacement de l'élément
-    elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
-
-}*/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function Bouton3_NomPays(){
-    setNom("paysNomOfficiel","chaussure");
-    setNom("paysCapitale","panier");
-	var xsltProcess = new XSLTProcessor();
-	var xmlPays = chargerHttpXML('countriesTP.xml');
-	var xslPays = chargerHttpXML('cherchePays.xsl');
-    xsltProcess.setParameter('nomPays',document.getElementById("nomPays").value);
-    xsltProcess.importStylesheet('cherchePays.xsl');
-    var newXmlDocument = xsltProcessor.transformToDocument('countriesTP.xml');
+    var xsltProcessor = new XSLTProcessor();
+
+    // Chargement du fichier XSL Ã  l'aide de XMLHttpRequest synchrone 
+    var xslDocument = chargerHttpXML("cherchePays.xsl");
+
+    // Importation du .xsl
+    xsltProcessor.importStylesheet(xslDocument);
+    xsltProcessor.setParameter(null,"nomPays",document.getElementById("nomPays").value)
+
+    // Chargement du fichier XML Ã  l'aide de XMLHttpRequest synchrone 
+    var xmlDocument = chargerHttpXML("countriesTP.xml");
+
+    // CrÃ©ation du document XML transformÃ© par le XSL
+    var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
+
+    // Recherche du parent (dont l'id est "here") de l'Ã©lÃ©ment Ã  remplacer dans le document HTML courant
+    var elementHtmlParent = window.document.getElementById("resultButton");
+    // Premier Ã©lÃ©ment fils du parent
+    var elementHtmlARemplacer = recupererPremierEnfantDeTypeNode(elementHtmlParent);
+    // Premier Ã©lÃ©ment "elementName" du nouveau document (par exemple, "ul", "table"...)
+    var elementAInserer = newXmlDocument.getElementsByTagName("span")[0];
+
+    // Remplacement de l'Ã©lÃ©ment
+    elementHtmlParent.replaceChild(elementAInserer, elementHtmlARemplacer);
 	
 }
 
-/*function Bouton3_ajaxEmployees(xmlDocumentUrl) {
-
-
-    var xmlDocument = chargerHttpXML(xmlDocumentUrl);
-
-    //extraction des noms à partir du document XML (avec une feuille de style ou en javascript)
-    var lesNoms = xmlDocument.getElementsByTagName("LastName");
-
-    // Parcours de la liste des noms avec une boucle for et 
-    // construction d'une chaine de charactères contenant les noms séparés par des espaces 
-    // Pour avoir la longueur d'une liste : attribut 'length'
-    // Accès au texte d'un noeud "LastName" : NOM_NOEUD.firstChild.nodeValue
-    var chaineDesNoms = "";
-    for (i = 0; i < lesNoms.length; i++) {
-        if (i > 0) {
-            chaineDesNoms = chaineDesNoms + ", ";
-        }
-        chaineDesNoms = chaineDesNoms + lesNoms[i].firstChild.nodeValue + " ";
-    }
-
-
-    // Appel (ou recopie) de la fonction setNom(...) ou bien autre façon de modifier le texte de l'élément "span"
-    setNom(chaineDesNoms);
-
-}*/
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function Bouton4_ajaxEmployeesTableau(xmlDocumentUrl, xslDocumentUrl) {
-    //commenter la ligne suivante qui affiche la boîte de dialogue!
-    alert("Fonction à compléter...");
+function Bouton4_ChargeAfficheDessin() {
+    var xmlDocument = chargerHttpXML("exemple.svg");
+    var xmlSerializer = new XMLSerializer();
+    var textSVG = xmlSerializer.serializeToString(xmlDocument);
+    document.getElementById("imageSvgFormes").innerHTML = textSVG;
+}
+
+
+function Bouton5_RendreCliquable() {
+    var enfantsFormes = document.getElementById("imageSvgFormes").getElementsByTagName("g")[0].childNodes;
+    for (var i = 0; i < enfantsFormes.length; i++){
+        enfantsFormes[i].addEventListener("click",
+            function(){
+                document.getElementById("objectName").innerHTML=this.getAttribute("title");
+            },false);
+    }
+}
+
+function Bouton6_ChargeAfficheCarte(){
+    var xmlDocument = chargerHttpXML("worldHigh.svg");
+    var xmlSerializer = new XMLSerializer();
+    var textSVG = xmlSerializer.serializeToString(xmlDocument);
+    document.getElementById("imageSvgMonde").innerHTML = textSVG;
+}
+
+function Bouton7_RendreCliquable() {
+    var enfantsPays = document.getElementById("imageSvgMonde").getElementsByTagName("g")[0].childNodes;
+    for (var j = 0; j < enfantsPays.length; j++){
+        enfantsPays[j].addEventListener("click",
+            function(){
+                document.getElementById("countryName").innerHTML=this.getAttribute("countryname");
+            },false);
+    }
+}
+
+function GetInfosParametres(param, numSpan){
+    var xsltProcessor = new XSLTProcessor();
+
+    // Chargement du fichier XSL Ã  l'aide de XMLHttpRequest synchrone 
+    var xslDocument = chargerHttpXML("chercheCapitaleDrapeau.xsl");
+
+    // Importation du .xsl
+    xsltProcessor.importStylesheet(xslDocument);
+    xsltProcessor.setParameter(null,"idPays",param);
+
+    // Chargement du fichier XML Ã  l'aide de XMLHttpRequest synchrone 
+    var xmlDocument = chargerHttpXML("countriesTP.xml");
+
+    // CrÃ©ation du document XML transformÃ© par le XSL
+    var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
+
+    // Premier Ã©lÃ©ment "elementName" du nouveau document (par exemple, "ul", "table"...)
+    var elementAInserer = newXmlDocument.getElementsByTagName("span")[numSpan];
+    console.log(elementAInserer);
+    return elementAInserer.innerHTML;
+    
+}
+
+function Bouton8_SurvolAffichage(){
+    var enfantsPays = document.getElementById("imageSvgMonde").getElementsByTagName("g")[0].childNodes;
+    for (var j = 0; j < enfantsPays.length; j++){
+        enfantsPays[j].addEventListener("mouseover",
+            function(){
+                document.getElementById("nomPaysTableau").innerHTML=this.getAttribute("countryname");
+                document.getElementById("capitalePaysTableau").innerHTML=GetInfosParametres(this.getAttribute("id"),0);
+                document.getElementById("drapeauPaysTableau").innerHTML=GetInfosParametres(this.getAttribute("id"),1);
+                this.setAttribute("style","fill:red");
+            },false);
+        enfantsPays[j].addEventListener("mouseleave",
+            function(){
+                document.getElementById("nomPaysTableau").innerHTML=this.getAttribute("countryname");
+                this.setAttribute("style","");
+            },false);
+
+    }
+}
+
+function genererCompletion(){
+    document.getElementById("autocompletion").addEventListener("input",
+        function(){
+
+    },false)
+
 }
