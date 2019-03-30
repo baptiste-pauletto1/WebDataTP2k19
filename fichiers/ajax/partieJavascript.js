@@ -199,7 +199,7 @@ function GetListePays(premieresLettres){
 }
 
 function genererCompletion(){
-    var user_input = document.getElementById("nomPays").value;
+	var user_input = document.getElementById("nomPays").value;
 	console.log(user_input);
 	var listeCompletion = GetListePays(user_input).split(",");
 	
@@ -208,4 +208,8 @@ function genererCompletion(){
 		options += '<option value="'+listeCompletion[i]+'" />';
 	}
 	document.getElementById('autocompletion').innerHTML = options;
+}
+
+function Bouton9_activerCompletion(){
+	document.getElementById("nomPays").setAttribute("oninput","genererCompletion()");
 }

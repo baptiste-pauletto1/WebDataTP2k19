@@ -40,6 +40,7 @@
 		</p>
 		<hr></hr>
 		
+		<!-- Séparation par continent-->
 		<xsl:apply-templates select="//infosContinent[not(preceding::continent = continent)]/continent"/>
 		
  	</body> 
@@ -57,6 +58,7 @@
 		<h3>
 			Pays du continent : <xsl:value-of select="."/> par sous-régions : <br/>
 		</h3>
+		<!--Séparation par sous-régions d'un continent-->
 		<xsl:apply-templates select="//infosContinent[not(preceding::subregion = subregion) and continent = $Continent]/subregion"/>
 		
 	</xsl:template>
@@ -99,11 +101,13 @@
 				<xsl:value-of select="position()"/>
 			</td>
 			<td>
+				<!--Nom commun des pays en vert + nom officiel des pays-->
 				<p><span style="color:green;">
 					<xsl:value-of select="name/common"/>
 					</span>
 					(<xsl:value-of select="name/official"/>)
 				</p>
+				<!-- Nom des pays en français en marron -->
 				<p style="color:brown">
 					<xsl:value-of select="name/native_name[@lang='fra']/official"/>
 				</p>
@@ -114,9 +118,11 @@
 			</td>
 
 			<td>
+				<!-- Si le pays est une île-->
 				<xsl:if test="./landlocked='false' and count(borders/neighbour) = 0">
 					Île
 				</xsl:if>
+				<!-- Sinon affichage du nom de tous les voisins d'un pays-->
 				<xsl:if test="count(borders/neighbour) > 0">
 					<xsl:for-each select="borders/neighbour">
 						<xsl:variable name="codePays" select="."/>
@@ -133,6 +139,7 @@
 			</td>
 
 			<td>
+				<!-- Affichage du drapeau d'un pays en faisant attention au fait que le code soit sensible à la casse-->
 				<xsl:variable name="codePays2" select="codes/cca2"/>
 				<xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
 				<xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
