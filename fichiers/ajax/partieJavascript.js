@@ -118,6 +118,7 @@ function Bouton5_RendreCliquable() {
 }
 
 function Bouton6_ChargeAfficheCarte(){
+	document.getElementById("tableauCarte").style.visibility = 'visible';
     var xmlDocument = chargerHttpXML("worldHigh.svg");
     var xmlSerializer = new XMLSerializer();
     var textSVG = xmlSerializer.serializeToString(xmlDocument);
