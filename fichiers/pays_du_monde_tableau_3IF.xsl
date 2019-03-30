@@ -16,7 +16,7 @@
  
  	<body style="background-color:white;">
    		<h1>Les pays du monde</h1> 
-      			Mise en forme par : Baptiste PAULETTO, Louis UNG et Fabien GELUS (g pa lu xd) (B3246)
+      			Mise en forme par : Baptiste PAULETTO, Louis UNG et Fabien GELUS (B3246)
       	<xsl:apply-templates select="//metadonnees"/>
 		
 		<hr></hr>

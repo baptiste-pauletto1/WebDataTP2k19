@@ -1,4 +1,9 @@
-﻿Question 1: toutes les capitales 
+﻿Trinôme B3246 composé de :
+-Baptiste PAULETTO (4019875)
+-Fabien GELUS (4014900)
+-Louis UNG (4014824)
+
+Question 1: toutes les capitales 
 Requête : //capital ou /countries/country/capital
 capital	Oranjestad
 capital	Kabul
@@ -73,7 +78,7 @@ lang	prs
 
 Partie 2:
 
-On supprime area de l'élément country
+On supprime area de l'élément country et on ajoute la ligne ci-dessous :
 <!ATTLIST country area CDATA #REQUIRED>
 
 Ajout d'un nouvel élément continent <!ELEMENT continent (#PCDATA)>
