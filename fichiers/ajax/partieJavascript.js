@@ -150,9 +150,9 @@ function GetInfosParametres(param, numSpan){
     // Création du document XML transformé par le XSL
     var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
 
-    // Premier élément "elementName" du nouveau document (par exemple, "ul", "table"...)
+    // Premier élément "span" du nouveau document
     var elementAInserer = newXmlDocument.getElementsByTagName("span")[numSpan];
-    console.log(elementAInserer);
+
     return elementAInserer.innerHTML;
     
 }
@@ -176,10 +176,36 @@ function Bouton8_SurvolAffichage(){
     }
 }
 
+function GetListePays(premieresLettres){
+	var xsltProcessor = new XSLTProcessor();
+
+    // Chargement du fichier XSL à l'aide de XMLHttpRequest synchrone 
+    var xslDocument = chargerHttpXML("completion.xsl");
+
+    // Importation du .xsl
+    xsltProcessor.importStylesheet(xslDocument);
+    xsltProcessor.setParameter(null,"premieresLettres",premieresLettres);
+
+    // Chargement du fichier XML à l'aide de XMLHttpRequest synchrone 
+    var xmlDocument = chargerHttpXML("countriesTP.xml");
+
+    // Création du document XML transformé par le XSL
+    var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
+
+    // Premier élément "span" du nouveau document
+    var elementListePays = newXmlDocument.getElementsByTagName("span")[0];
+	
+    return elementListePays.firstChild.nodeValue;
+}
+
 function genererCompletion(){
-    document.getElementById("autocompletion").addEventListener("input",
-        function(){
-
-    },false)
-
+    var user_input = document.getElementById("nomPays").value;
+	console.log(user_input);
+	var listeCompletion = GetListePays(user_input).split(",");
+	
+	var options ="";
+	for(var i = 0; i < listeCompletion.length; i++){
+		options += '<option value="'+listeCompletion[i]+'" />';
+	}
+	document.getElementById('autocompletion').innerHTML = options;
 }

@@ -7,16 +7,14 @@
 	<xsl:template match="/"> 
 		<html>
 		<body style="background-color:white;">	
-			<xsl:apply-templates select="//country/name[contains(common,$premieresLettres)]"/>
+			<span>
+				<xsl:for-each select="//name[starts-with(common,$premieresLettres)]">
+					<xsl:value-of select="common"/><xsl:if test="position() != last()">,</xsl:if>
+				</xsl:for-each>
+			</span>
 		</body> 
 		</html>
 
-	</xsl:template>
-	
-	<xsl:template match="country">
-		<span>
-			<xsl:value-of select="name/common"/>
-		</span>
 	</xsl:template>
 
 </xsl:stylesheet>
